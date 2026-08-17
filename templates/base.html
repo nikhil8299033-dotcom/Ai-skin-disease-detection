@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AI-Based Skin Disease Detection | Healthcare AI Platform{% endblock %}</title>
+  <meta name="description" content="An AI-powered academic preliminary screening platform for skin lesion classification using Deep Learning and Computer Vision.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Top Medical Disclaimer Alert -->
+  <div class="disclaimer-banner" id="disclaimerBanner">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+      <line x1="12" y1="9" x2="12" y2="13"></line>
+      <line x1="12" y1="17" x2="12.01" y2="17"></line>
+    </svg>
+    <span><strong>Medical Disclaimer:</strong> This system is for preliminary academic screening only and does <u>NOT</u> replace a professional medical diagnosis.</span>
+  </div>
+
+  <!-- Site Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <!-- Logo -->
+      <a href="{{ url_for('index') }}" class="brand-logo">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div class="brand-text">AI <span>SkinCare</span></div>
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
+        <li><a href="{{ url_for('analyze') }}" class="nav-link">Analyze</a></li>
+        <li><a href="{{ url_for('history') }}" class="nav-link">History</a></li>
+        <li><a href="{{ url_for('index') }}#how-it-works" class="nav-link">How It Works</a></li>
+        <li><a href="{{ url_for('about') }}" class="nav-link">About</a></li>
+        <li>
+          <a href="{{ url_for('model_status_page') }}" class="nav-link">
+            <span>Model</span>
+            {% if model_status and model_status.connected %}
+              <span class="nav-badge-status status-online"><span class="status-dot"></span>Online</span>
+            {% else %}
+              <span class="nav-badge-status status-offline"><span class="status-dot"></span>Not Connected</span>
+            {% endif %}
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('analyze') }}" class="btn btn-primary nav-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Analyze Now
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main id="mainContent">
+    {% if not_found %}
+      <div class="container" style="padding: 6rem 1.5rem; text-align: center;">
+        <h1 style="font-size: 4rem; color: var(--primary);">404</h1>
+        <h2 style="margin: 1rem 0;">Page Not Found</h2>
+        <p style="margin-bottom: 2rem;">The requested page could not be located.</p>
+        <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Home</a>
+      </div>
+    {% else %}
+      {% block content %}{% endblock %}
+    {% endif %}
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+            <div class="brand-icon" style="width: 32px; height: 32px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3 style="margin: 0;">AI-Based Skin Disease Detection</h3>
+          </div>
+          <p>
+            An academic research project implementing Deep Convolutional Neural Networks and Transfer Learning for preliminary dermatological image screening.
+          </p>
+          <div style="margin-top: 1rem; display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="badge badge-blue">Flask REST API</span>
+            <span class="badge badge-emerald">TensorFlow / Keras</span>
+            <span class="badge badge-purple">OpenCV</span>
+            <span class="badge badge-amber">SQLite</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('analyze') }}">Image Analysis</a></li>
+            <li><a href="{{ url_for('history') }}">Prediction History</a></li>
+            <li><a href="{{ url_for('index') }}#how-it-works">How It Works</a></li>
+            <li><a href="{{ url_for('about') }}">About Project & Methodology</a></li>
+            <li><a href="{{ url_for('model_status_page') }}">Model Status & Diagnostics</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Medical Disclaimer</h4>
+          <p style="font-size: 0.85rem; line-height: 1.5; color: #cbd5e1;">
+            This software is created strictly for academic research and college project demonstration. The predictions generated by the AI model are preliminary estimates and must never be considered medical diagnoses, prescriptions, or clinical advice. Always consult a licensed dermatologist.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 AI-Based Skin Disease Detection. College Project.
+        </div>
+        <div>
+          Dataset Sources: <a href="https://doi.org/10.7910/DVN/DBW86T" target="_blank" rel="noopener" style="color: #38bdf8;">HAM10000</a> &bull; <a href="https://www.isic-archive.com/" target="_blank" rel="noopener" style="color: #38bdf8;">ISIC Archive</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Global Scripts -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

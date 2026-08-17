@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+
+{% block title %}AI-Based Skin Disease Detection | Healthcare Deep Learning Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+        <span>Deep Learning &bull; Computer Vision &bull; Healthcare AI</span>
+      </div>
+
+      <h1 class="hero-title">
+        AI-Based <span class="gradient-text">Skin Disease</span> Detection
+      </h1>
+
+      <p class="hero-description">
+        Upload a skin image and get a preliminary AI-based screening result. Powered by Deep Convolutional Neural Networks (CNN) and Transfer Learning for rapid dermatological assessment.
+      </p>
+
+      <div class="hero-actions">
+        <a href="{{ url_for('analyze') }}" class="btn btn-primary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Analyze Skin Image
+        </a>
+        <a href="#how-it-works" class="btn btn-secondary btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          How It Works
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <h4>7 Classes</h4>
+          <p>HAM10000 Lesion Categories</p>
+        </div>
+        <div class="stat-item">
+          <h4>224×224</h4>
+          <p>OpenCV Tensor Rescaling</p>
+        </div>
+        <div class="stat-item">
+          <h4>CNN &amp; TL</h4>
+          <p>Transfer Learning Backbone</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Interactive Scanner Mockup Visual -->
+    <div class="hero-visual">
+      <div class="hero-preview-card">
+        <div class="hero-scan-mockup">
+          <div class="scan-grid-overlay"></div>
+          <div class="scan-laser-line"></div>
+          
+          <div class="scan-target-box">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.8">
+              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+              <circle cx="12" cy="12" r="3" fill="#38bdf8"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem;">Dermatoscopic AI Analysis</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Real-time OpenCV Feature Normalization</div>
+          </div>
+          <span class="badge badge-emerald">Preliminary</span>
+        </div>
+      </div>
+
+      <!-- Floating Badges -->
+      <div class="hero-floating-badge floating-badge-top">
+        <div style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981;"></div>
+        <span style="font-size: 0.82rem; font-weight: 700; color: #0f172a;">AI Model Connected</span>
+      </div>
+
+      <div class="hero-floating-badge floating-badge-bottom">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span style="font-size: 0.82rem; font-weight: 700; color: #0f172a;">No Prescriptions &bull; Safe Guidance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. HOW IT WORKS SECTION (4-Step Visual Workflow) -->
+<section class="section section-alt" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Methodology</span>
+      <h2>How It Works</h2>
+      <p>A systematic 4-step pipeline bridging computer vision and deep learning inference.</p>
+    </div>
+
+    <div class="workflow-steps-grid">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+        </div>
+        <h3>1. Upload Skin Image</h3>
+        <p>User uploads a dermatological photo (JPG, JPEG, PNG, WEBP) through the secure drag-and-drop interface.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="6" cy="6" r="3"></circle>
+            <circle cx="6" cy="18" r="3"></circle>
+            <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+            <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+            <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+          </svg>
+        </div>
+        <h3>2. Image Preprocessing</h3>
+        <p>OpenCV decodes the image, performs RGB conversion, resizes to standard 224&times;224 resolution, and normalizes pixel intensities.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+        </div>
+        <h3>3. AI/CNN Model Analysis</h3>
+        <p>The deep learning convolutional model computes spatial feature representations through convolutional layers and activation maps.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <div class="step-icon-wrap">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <h3>4. Preliminary Prediction</h3>
+        <p>Softmax probabilities are classified into disease categories with confidence scores, risk levels, and clear clinical guidance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Features Section -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Capabilities</span>
+      <h2>Key System Features</h2>
+      <p>Engineered for speed, transparency, and clinical responsibility.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+          </svg>
+        </div>
+        <h3>Strict Non-Fake Model Protocol</h3>
+        <p>The backend requires genuine TensorFlow weights. If the model file is not connected, the UI shows an honest disconnected state rather than faking diagnosis.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <h3>Confidence Visualizer</h3>
+        <p>Displays exact probabilistic confidence percentages and full 7-class distribution breakdowns for complete classification transparency.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3>Low-Confidence Alerts</h3>
+        <p>Predictions below 60% confidence are automatically flagged with an advisory recommending direct inspection by a certified dermatologist.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 14 14"></polyline>
+          </svg>
+        </div>
+        <h3>Prediction History &amp; Logs</h3>
+        <p>Built-in SQLite database stores past screening records with timestamped thumbnails and enables single-click record deletion.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <h3>Live Admin Diagnostics</h3>
+        <p>Includes a dedicated status dashboard displaying model architecture, loaded class mappings, and API latency measurements.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          </svg>
+        </div>
+        <h3>Flexible Architecture</h3>
+        <p>Plug-and-play support for MobileNetV2, ResNet50, EfficientNet, or custom CNN weights saved as <code>model.keras</code> or <code>model.h5</code>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technology Used Section -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Architecture</span>
+      <h2>Technologies Used</h2>
+      <p>Constructed with industry-standard frameworks across the full software and AI stack.</p>
+    </div>
+
+    <div class="tech-stack-grid">
+      <div class="tech-badge-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16.5 9.4 7.55 4.24a1.78 1.78 0 0 0-2.5 1.55v12.42a1.78 1.78 0 0 0 2.5 1.55L16.5 14.6a1.78 1.78 0 0 0 0-3.2z"></path>
+        </svg>
+        <h4>Python 3</h4>
+        <span>Core Backend Logic</span>
+      </div>
+
+      <div class="tech-badge-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+        </svg>
+        <h4>Flask</h4>
+        <span>REST API &amp; Web Routing</span>
+      </div>
+
+      <div class="tech-badge-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="2" width="20" height="20" rx="4"></rect>
+          <path d="M7 12h10M12 7v10"></path>
+        </svg>
+        <h4>TensorFlow / Keras</h4>
+        <span>Deep CNN &amp; Transfer Learning</span>
+      </div>
+
+      <div class="tech-badge-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94"></path>
+        </svg>
+        <h4>OpenCV</h4>
+        <span>Image Preprocessing &amp; Rescaling</span>
+      </div>
+
+      <div class="tech-badge-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+        </svg>
+        <h4>SQLite</h4>
+        <span>Prediction Records Database</span>
+      </div>
+
+      <div class="tech-badge-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        <h4>HTML5 &bull; CSS3 &bull; JS</h4>
+        <span>Responsive Healthcare UI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Medical Disclaimer Callout Section -->
+<section class="section">
+  <div class="container">
+    <div class="card" style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1.5px solid #fde68a; padding: 2.5rem;">
+      <div style="display: flex; align-items: flex-start; gap: 1.5rem;">
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: #fef3c7; color: #d97706; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.2);">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+        </div>
+        <div>
+          <h3 style="color: #92400e; font-size: 1.4rem; margin-bottom: 0.5rem;">Important Medical Disclaimer</h3>
+          <p style="color: #78350f; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+            This web application is developed solely as an academic project demonstrating the application of Convolutional Neural Networks to dermatological image classification. The predictions generated are purely statistical estimates for preliminary screening and do <strong>NOT</strong> constitute a medical diagnosis or treatment plan.
+          </p>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="{{ url_for('analyze') }}" class="btn btn-primary btn-sm">Start Preliminary Screening</a>
+            <a href="{{ url_for('about') }}" class="btn btn-secondary btn-sm">Read Project Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

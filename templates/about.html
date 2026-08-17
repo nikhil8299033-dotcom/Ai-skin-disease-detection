@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}About Project &amp; Methodology | AI-Based Skin Disease Detection{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 960px; padding-top: 3rem; padding-bottom: 5rem;">
+
+  <div class="section-header" style="text-align: left; margin-bottom: 2.5rem;">
+    <span class="section-tag">Academic Research &bull; College Project</span>
+    <h2>AI-Based Skin Disease Detection</h2>
+    <p>Comprehensive project documentation covering problem formulation, deep convolutional neural networks, transfer learning, and dataset benchmarks.</p>
+  </div>
+
+  <!-- 1. Problem Statement & Proposed Solution -->
+  <div class="about-content-card">
+    <h3>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      1. Problem Statement &amp; Proposed Solution
+    </h3>
+    <p>
+      <strong>Problem Statement:</strong> Skin diseases are among the most prevalent human illnesses globally, affecting over 1.9 billion people at any given time. Early detection of malignant skin lesions such as Melanoma is critical for favorable patient survival rates. However, access to board-certified dermatologists is often limited in remote or underserved areas, leading to delayed clinical evaluations.
+    </p>
+    <p>
+      <strong>Proposed Solution:</strong> This project proposes an automated, non-invasive preliminary screening web application powered by Computer Vision and Deep Learning. By enabling patients and general practitioners to upload dermatoscopic images, the system provides rapid classification probabilities across 7 major skin lesion categories, triaging cases that urgently require specialized dermatological examination.
+    </p>
+  </div>
+
+  <!-- 2. Project Objectives -->
+  <div class="about-content-card">
+    <h3>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" stroke-width="2.2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+      2. Project Objectives
+    </h3>
+    <ul>
+      <li>Implement an automated pipeline using <strong>OpenCV</strong> for lesion image ingestion, color-space conversion (BGR to RGB), spatial resizing to 224&times;224 pixels, and tensor normalization.</li>
+      <li>Leverage <strong>Convolutional Neural Networks (CNNs)</strong> and <strong>Transfer Learning</strong> backbones (MobileNetV2, ResNet50, EfficientNet) trained on verified dermatological datasets.</li>
+      <li>Construct an asynchronous, decoupled <strong>Flask REST API</strong> and <strong>SQLite</strong> persistence layer for rapid inference and audit logging.</li>
+      <li>Enforce strict ethical and clinical safeguards: clearly declaring preliminary screening status, highlighting low confidence (<60%), and refusing prescription generation.</li>
+    </ul>
+  </div>
+
+  <!-- 3. Methodology & Deep Learning Architecture -->
+  <div class="about-content-card">
+    <h3>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2.2">
+        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+      </svg>
+      3. Methodology, CNNs &amp; Transfer Learning
+    </h3>
+    <p>
+      <strong>Convolutional Neural Networks (CNN):</strong> CNNs are specialized deep learning architectures designed to process pixel matrices through spatial convolution filters. They automatically extract hierarchical features—ranging from low-level edges, textures, and color variations to high-level lesion border asymmetry and pigment networks.
+    </p>
+    <p>
+      <strong>Transfer Learning:</strong> Rather than training a deep network from scratch (which requires millions of medical images), transfer learning utilizes pre-trained base architectures (such as <em>MobileNetV2</em>, <em>ResNet50</em>, or <em>VGG16</em>) initialized with ImageNet weights. The feature extraction layers are frozen, and custom dense classification heads with Dropout and Softmax activations are fine-tuned on specialized dermatological data.
+    </p>
+
+    <div style="background: #f8fafc; padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-light); margin-top: 1rem;">
+      <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Mathematical Softmax Classification:</h4>
+      <p style="font-family: monospace; font-size: 0.9rem; color: var(--primary);">
+        P(Y = j | X) = exp(z_j) / &sum; [exp(z_k)] (for k = 1 to 7 classes)
+      </p>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem;">
+        Converts the raw logit outputs from the top dense layer into a normalized probability distribution across all 7 disease categories.
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. Dataset Sources -->
+  <div class="about-content-card">
+    <h3>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.2">
+        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+      </svg>
+      4. Dataset Sources &amp; Diagnostic Classes
+    </h3>
+    <p>
+      The model is aligned with the benchmark <strong>HAM10000</strong> ("Human Against Machine with 10,000 training images") dataset and the <strong>ISIC Archive</strong> (International Skin Imaging Collaboration):
+    </p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-top: 1rem;">
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm);">
+        <strong>1. MEL:</strong> Melanoma (Malignant)
+      </div>
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm);">
+        <strong>2. NV:</strong> Melanocytic Nevus (Mole)
+      </div>
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm);">
+        <strong>3. BCC:</strong> Basal Cell Carcinoma
+      </div>
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm);">
+        <strong>4. AKIEC:</strong> Actinic Keratoses
+      </div>
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm);">
+        <strong>5. BKL:</strong> Benign Keratosis
+      </div>
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm);">
+        <strong>6. DF:</strong> Dermatofibroma
+      </div>
+      <div style="background: #f1f5f9; padding: 0.75rem; border-radius: var(--radius-sm);">
+        <strong>7. VASC:</strong> Vascular Lesions
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Limitations & Future Scope -->
+  <div class="about-content-card">
+    <h3>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </svg>
+      5. Limitations &amp; Future Scope
+    </h3>
+    <p><strong>Current Limitations:</strong></p>
+    <ul>
+      <li>Image artifacts, hair, poor lighting, or camera defocus can degrade classification confidence.</li>
+      <li>Dataset class imbalance: Common moles (NV) significantly outnumber rare vascular or amelanotic lesions in standard datasets.</li>
+      <li>Lack of patient clinical history integration (e.g. age, genetic predisposition, anatomical lesion site).</li>
+    </ul>
+
+    <p><strong>Future Scope:</strong></p>
+    <ul>
+      <li>Integration of <strong>Grad-CAM (Gradient-weighted Class Activation Mapping)</strong> to visually highlight the salient heatmaps guiding model decisions.</li>
+      <li>Multimodal classification combining dermatoscopic images with patient metadata (age, sex, lesion localization).</li>
+      <li>Deployment as a mobile PWA (Progressive Web App) with on-device TensorFlow Lite / ONNX Web Runtime for offline edge inference.</li>
+    </ul>
+  </div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="{{ url_for('analyze') }}" class="btn btn-primary btn-lg">Test the Screening Tool</a>
+  </div>
+
+</div>
+{% endblock %}

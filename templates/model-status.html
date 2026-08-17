@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Model Status &amp; Admin Diagnostics | AI-Based Skin Disease Detection{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1040px; padding-top: 2.5rem; padding-bottom: 4rem;">
+
+  <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="section-tag">System Health</span>
+        <h2 style="margin: 0.25rem 0;">Model Status &amp; Diagnostics</h2>
+        <p>Real-time telemetry, model connectivity state, database metrics, and API health checks.</p>
+      </div>
+      <div style="display: flex; gap: 0.75rem;">
+        <button id="reloadModelBtn" class="btn btn-secondary btn-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Reload Model
+        </button>
+        <button id="pingApiBtn" class="btn btn-outline btn-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          Ping API Latency
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Telemetry Cards -->
+  <div class="status-grid">
+    <!-- Model Connectivity -->
+    <div class="status-stat-card">
+      <div class="stat-header">
+        <span>Model Connectivity</span>
+        {% if model_status.connected %}
+          <span class="badge badge-emerald">Online</span>
+        {% else %}
+          <span class="badge badge-rose">Offline</span>
+        {% endif %}
+      </div>
+      <div class="stat-val" style="display: flex; align-items: center; gap: 10px;">
+        {% if model_status.connected %}
+          <span style="color: #10b981;">Connected</span>
+        {% else %}
+          <span style="color: #ef4444;">Not Connected</span>
+        {% endif %}
+      </div>
+      <p style="font-size: 0.82rem; margin-top: 0.5rem; color: var(--text-muted);">
+        File: <strong>{{ model_status.model_file or 'None (model.keras missing)' }}</strong>
+      </p>
+    </div>
+
+    <!-- Total Predictions Logged -->
+    <div class="status-stat-card">
+      <div class="stat-header">
+        <span>Database Records</span>
+        <span class="badge badge-blue">SQLite</span>
+      </div>
+      <div class="stat-val">
+        {{ stats.total_records }} <span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">screenings</span>
+      </div>
+      <p style="font-size: 0.82rem; margin-top: 0.5rem; color: var(--text-muted);">
+        Avg. Confidence: <strong>{{ stats.average_confidence_pct }}%</strong>
+      </p>
+    </div>
+
+    <!-- API & Server Status -->
+    <div class="status-stat-card">
+      <div class="stat-header">
+        <span>API &amp; REST Server</span>
+        <span id="pingResultText" class="badge badge-emerald">● Online (Flask)</span>
+      </div>
+      <div class="stat-val" style="font-size: 1.5rem;">
+        HTTP / JSON
+      </div>
+      <p style="font-size: 0.82rem; margin-top: 0.5rem; color: var(--text-muted);">
+        Endpoint: <code>POST /api/predict</code>
+      </p>
+    </div>
+  </div>
+
+  <!-- Detailed Model Specifications Panel -->
+  <div class="model-info-panel">
+    <h3 style="font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+      </svg>
+      Deep Learning Architecture &amp; Parameters
+    </h3>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem;">
+      <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+        <div style="font-size: 0.8rem; color: var(--text-muted);">FRAMEWORK</div>
+        <div style="font-weight: 700; font-size: 1.05rem; margin-top: 2px;">{{ model_status.framework }}</div>
+      </div>
+      <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+        <div style="font-size: 0.8rem; color: var(--text-muted);">INPUT TENSOR SHAPE</div>
+        <div style="font-weight: 700; font-size: 1.05rem; margin-top: 2px;">(1, 224, 224, 3) RGB</div>
+      </div>
+      <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+        <div style="font-size: 0.8rem; color: var(--text-muted);">OUTPUT CLASSES</div>
+        <div style="font-weight: 700; font-size: 1.05rem; margin-top: 2px;">{{ model_status.classes_count }} Diagnostic Categories</div>
+      </div>
+      <div style="background: #f8fafc; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-light);">
+        <div style="font-size: 0.8rem; color: var(--text-muted);">STATUS MESSAGE</div>
+        <div style="font-weight: 600; font-size: 0.88rem; color: var(--text-main); margin-top: 2px;">{{ model_status.message }}</div>
+      </div>
+    </div>
+
+    <!-- Loaded Disease Classes List -->
+    <div style="margin-top: 1.75rem;">
+      <h4 style="font-size: 1rem; margin-bottom: 0.5rem;">Configured Disease Output Neurons (from <code>model/classes.json</code>):</h4>
+      <div class="classes-pills-grid">
+        {% for c in classes %}
+          <div style="background: #f1f5f9; padding: 0.5rem 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-light); font-size: 0.85rem;">
+            <strong style="color: var(--primary);">[{{ c.id }}] {{ c.code|upper }}:</strong> {{ c.name }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- How to Connect / Replace Trained Weights Guide -->
+  <div class="card" style="background: #ffffff;">
+    <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem; color: var(--text-main);">
+      How to Connect or Update Your Model
+    </h3>
+    <ol style="padding-left: 1.25rem; font-size: 0.92rem; color: #334155; line-height: 1.7;">
+      <li>
+        <strong>Option A (Instant Sample Model):</strong> Run <code>python create_sample_model.py</code> in your terminal. This will automatically export a clean MobileNetV2 architecture to <code>model/model.keras</code>.
+      </li>
+      <li>
+        <strong>Option B (Custom Trained Model):</strong> Train your CNN (e.g. ResNet50, EfficientNet, MobileNet) in Jupyter/Colab on the HAM10000 or ISIC dataset and save it as <code>model/model.keras</code> or <code>model/model.h5</code>.
+      </li>
+      <li>
+        <strong>Option C (Change Class Labels):</strong> Edit <code>model/classes.json</code> to modify disease names, descriptions, and risk levels.
+      </li>
+      <li>
+        Click the <strong>"Reload Model"</strong> button above or restart Flask to activate the changes.
+      </li>
+    </ol>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='js/model-status.js') }}"></script>
+{% endblock %}

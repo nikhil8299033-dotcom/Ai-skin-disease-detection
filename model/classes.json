@@ -1,0 +1,84 @@
+{
+  "dataset": "HAM10000 (Human Against Machine with 10000 training images) / ISIC Archive",
+  "total_classes": 7,
+  "input_shape": [224, 224, 3],
+  "classes": [
+    {
+      "id": 0,
+      "code": "akiec",
+      "name": "Actinic Keratoses and Intraepithelial Carcinoma",
+      "short_name": "Actinic Keratosis (AKIEC)",
+      "category": "Pre-cancerous / Non-Melanoma",
+      "risk_level": "Moderate",
+      "badge_color": "amber",
+      "description": "Actinic keratoses are rough, scaly patches on sun-damaged skin considered pre-cancerous, with potential progression to squamous cell carcinoma if untreated.",
+      "clinical_notes": "Common in older individuals on sun-exposed areas (face, scalp, forearms). Early clinical consultation with a dermatologist is recommended for lesion evaluation and management."
+    },
+    {
+      "id": 1,
+      "code": "bcc",
+      "name": "Basal Cell Carcinoma",
+      "short_name": "Basal Cell Carcinoma (BCC)",
+      "category": "Malignant Non-Melanoma Skin Cancer",
+      "risk_level": "High",
+      "badge_color": "rose",
+      "description": "Basal cell carcinoma is the most common form of skin cancer, arising from the basal cells of the epidermis. It grows slowly and rarely metastasizes but can cause local tissue invasion.",
+      "clinical_notes": "Typically appears as a pearly bump or non-healing sore. Prompt dermatological evaluation is advised for surgical or topical intervention."
+    },
+    {
+      "id": 2,
+      "code": "bkl",
+      "name": "Benign Keratosis-like Lesions",
+      "short_name": "Benign Keratosis (BKL)",
+      "category": "Benign",
+      "risk_level": "Low",
+      "badge_color": "emerald",
+      "description": "This group comprises benign skin growths including seborrheic keratoses, solar lentigines, and lichen-planus-like keratoses. These lesions are entirely non-cancerous.",
+      "clinical_notes": "Common in middle-aged and older adults. While harmless, any rapidly evolving or bleeding lesion should always be inspected by a medical professional."
+    },
+    {
+      "id": 3,
+      "code": "df",
+      "name": "Dermatofibroma",
+      "short_name": "Dermatofibroma (DF)",
+      "category": "Benign",
+      "risk_level": "Low",
+      "badge_color": "emerald",
+      "description": "A common, harmless, firm dermal nodule formed by fibrous tissue. Often found on the lower extremities and may develop after minor insect bites or trauma.",
+      "clinical_notes": "Typically static and asymptomatic. Characterized by the 'dimple sign' when pinched. Routine clinical verification ensures correct distinction from other lesions."
+    },
+    {
+      "id": 4,
+      "code": "mel",
+      "name": "Melanoma",
+      "short_name": "Melanoma (MEL)",
+      "category": "Malignant Skin Cancer",
+      "risk_level": "Critical",
+      "badge_color": "red",
+      "description": "Melanoma is an aggressive skin cancer originating in pigment-producing melanocytes. It accounts for the majority of skin cancer deaths due to its potential for early metastasis.",
+      "clinical_notes": "Follows ABCDE criteria (Asymmetry, Border irregularity, Color variegation, Diameter >6mm, Evolution). Requires immediate, urgent evaluation by a licensed dermatologist or oncologist."
+    },
+    {
+      "id": 5,
+      "code": "nv",
+      "name": "Melanocytic Nevus",
+      "short_name": "Melanocytic Nevus / Mole (NV)",
+      "category": "Benign",
+      "risk_level": "Low",
+      "badge_color": "emerald",
+      "description": "A common, benign accumulation of melanocytes, commonly known as a mole. Most adults have between 10 and 40 common nevi across their body.",
+      "clinical_notes": "Generally stable and harmless. Regular self-monitoring for changes in size, shape, or color is standard dermatological preventive advice."
+    },
+    {
+      "id": 6,
+      "code": "vasc",
+      "name": "Vascular Lesions",
+      "short_name": "Vascular Lesion (VASC)",
+      "category": "Benign / Vascular",
+      "risk_level": "Low",
+      "badge_color": "purple",
+      "description": "Benign vascular proliferations including cherry angiomas, angiokeratomas, and pyogenic granulomas characterized by dilated blood vessels in the skin.",
+      "clinical_notes": "Usually benign. Sudden rapid growth or spontaneous bleeding warrants examination by a healthcare provider to confirm diagnosis."
+    }
+  ]
+}
